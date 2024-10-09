@@ -1,25 +1,23 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
+import alarmsData from '@/alarms.json'
 
-const alarms = ref([
-  { id: 1, time: '00.00', wakeOn: true },
-  { id: 2, time: '07.00', wakeOn: false },
-  { id: 3, time: '07.15', wakeOn: false },
-  { id: 4, time: '07.10', wakeOn: true }
-]);
+const alarms = ref(alarmsData);
 
 function toggleOnOff(index) {
   alarms.value[index].wakeOn = !alarms.value[index].wakeOn;
 }
+
 </script>
 
 <template>
   <div class="Iphone1415Pro1" style="width: 393px; height: 852px; position: relative; background: white">
+    <div style="height: 600px; overflow-y: scroll;">
     <div v-for="(alarm, index) in alarms" :key="alarm.id" @click="toggleOnOff(index)" :style="{top: `${index * 197}px`, position: 'absolute', width: '393px', height: '197px'}">
       <div class="Rectangle2" style="width: 393px; height: 166px; left: 0px; top: 0px; position: absolute; background: rgba(217, 217, 217, 0)"></div>
       <div class="00" style="left: 37px; top: 41px; position: absolute; color: rgba(0, 0, 0, 0.61); font-size: 64px; font-family: Futura; font-weight: 500; word-wrap: break-word">{{alarm.time}}</div>
 
-      
+
     <div v-if="!alarm.wakeOn" class="AlarmOff" style="width: 393px; height: 197px; left: 0px; top: 0px; position: absolute">
       <div class="Rectangle1" style="cursor:pointer; width: 67px; height: 19px; left: 277px; top: 70px; position: absolute; background: #D9D9D9; border-radius: 100px"></div>
       <div class="Ellipse2" style="cursor:pointer; width: 29px; height: 29px; left: 277px; top: 65px; position: absolute; background: #777777; border-radius: 9999px"></div>
@@ -32,10 +30,10 @@ function toggleOnOff(index) {
       <i class="pi pi-angle-down" style="color:black; width: 1px; height: 0px; left: 337px; top: 151px; position: absolute; "></i>
       <div class="Line1" style="width: 333px; height: 0px; left: 30px; top: 197px; position: absolute; border: 1px rgba(56.97, 106.13, 241.32, 0.30) solid"></div>
     </div> 
-
+    </div>
 
     <RouterLink to="/edit">
-      <div style="width: 81px; height: 116px; left: 156px; top: 699px; position: absolute; cursor: pointer;">
+      <div style="width: 81px; height: 116px; left: 156px; top: 699px; position: fixed; cursor: pointer;">
         <div class="Ellipse1" style="width: 81px; height: 81px; left: 0px; top: 25px; position: absolute; background: #396AF1; border-radius: 9999px"></div>
         <div style="left: 11px; top: 0px; position: absolute; color: white; font-size: 96px; font-family: Futura; font-weight: 400; word-wrap: break-word">+</div>
       </div>
